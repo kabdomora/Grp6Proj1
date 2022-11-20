@@ -1,19 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Free, Movie reccomendations, user input">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com?plugins=typography,line-clamp"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d'
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .bg-primary {
+          @apply bg-gradient-to-br 
+      from-red-100 
+      to-blue-400 
+      via-gray-200;
+        }
+      }
+    </style>
+
     <title>Movie Finder</title>
 </head>
-<body>
-    <h1>Movie finder</h1>
-    <form action="">
-        <label for="movie-name"></label>
-        <input type="text" name="" id="movie-name">
-    </form>
 
-    
+<body>
+  <center>
+    <div class="w-full h-screen bg-primary p-16">
+
+  <header>
+    <div class="prose prose-xl">
+        <h1>
+          <span style="color:darkred">Movie</span><span style="color:goldenrod">Finder</span>
+        </h1>
+
+    <p class="italic", "text-small" >Finding something to watch has never been so easy!</p>
+
+  <form action="">
+    <label for="movie-name"></label>
+    <input type="text" name="" id="movie-name">
+  </form>
+</header>
+
+  </center>
+    </div> 
+    </div>
 </body>
+
+
+<script src="script.js"></script>
+
 </html>
