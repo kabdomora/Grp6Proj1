@@ -16,3 +16,7 @@ via-gray-200;
     shadow-md 
     shadow:[#1DA1F2]/40
 }
+
+.center {
+  text-align: center;
+}

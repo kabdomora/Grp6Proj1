@@ -37,26 +37,54 @@
 </head>
 
 <body>
-  <center>
-    <div class="w-full h-screen bg-primary p-16">
+  
+    <div class="w-full bg-primary p-16">
+    <center>
+      <header>
+        <div class="prose prose-xl">
+          <h1>
+            <span style="color:darkred">Movie</span><span style="color:goldenrod">Finder</span>
+          </h1>
 
-  <header>
-    <div class="prose prose-xl">
-        <h1>
-          <span style="color:darkred">Movie</span><span style="color:goldenrod">Finder</span>
-        </h1>
+          <p class="italic">Finding something to watch has never been so easy!</p>
 
-    <p class="italic", "text-small" >Finding something to watch has never been so easy!</p>
+          <form action="">
+            <label for="movie-name"></label>
+            <input type="text" name="" id="movie-name">
+          </form>
 
-  <form action="">
-    <label for="movie-name"></label>
-    <input type="text" name="" id="movie-name">
-  </form>
-</header>
+        </div> 
+      </header>
+    </center>
 
-  </center>
-    </div> 
+      <section class="grid place-items-center h-180">
+        <iframe width="65%" height="500"
+        src="https://www.youtube.com/embed/6JnN1DmbqoU">
+        </iframe>
+        <span>Movie rating will go here</span>
+      </section>
+    
+      <section class="h-96">
+        <p>Reviews will be listed dynamically here</p>
+      </section>
+    
+      <section class="h-96">
+        <p>Recommended titles will be listed dynamically here</p>
+      </section>
+    
+      <footer class="grid place-items-center">
+        <p class="prose prose-a">Results brought to you by </p>
+        <div class="flex flex-row space-x-5 place-items-center">          
+          <a href="http://www.themoviedb.org"><img src="./images/TMDB-logo.PNG" loading="lazy" width="100" alt="the movie database logo"/></a>
+          <span>and</span>
+          <a href="http://www.utelly.com"><img src="https://uploads-ssl.webflow.com/604fe0b5c0738d69fcb1de55/604fe0b5c0738d2584b1deaa_footer%20logo.svg" loading="lazy" width="100" alt="utelly logo"></a>
+        </div>    
+      </footer>
+
     </div>
+  
+  
+
 </body>
 
 
