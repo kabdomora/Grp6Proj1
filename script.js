@@ -3,6 +3,8 @@ var searchButton = document.querySelector('#fetch-button');
 var deleteMe = document.querySelector('#deletelater');
 var msgDiv = document.querySelector("#msg");
 
+window.onload = localStorage.clear();
+
 renderLastRegistered();
 
 function displayMessage(type, message) {
