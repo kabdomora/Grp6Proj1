@@ -1,3 +1,6 @@
+var movieName = document.querySelector('#movie-name');
+var searchButton = document.querySelector('#fetch-button');
+
 
 
 
