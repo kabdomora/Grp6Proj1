@@ -1,7 +1,33 @@
 var movieName = document.querySelector('#movie-name');
 var searchButton = document.querySelector('#fetch-button');
+var deleteMe = document.querySelector('#deletelater');
+var msgDiv = document.querySelector("#msg");
 
+renderLastRegistered();
 
+function displayMessage(type, message) {
+    msgDiv.textContent = message;
+    msgDiv.setAttribute("class", type);
+  }
+
+function renderLastRegistered() {
+    var movieEl = localStorage.getItem('movie');
+    deleteMe.textContent = movieEl;
+
+}
+
+searchButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    var movie = document.querySelector('#movie-name').value;
+
+    if (movie === "") {
+        displayMessage("error", "Please enter a movie title to search the database");
+    } else {
+        localStorage.setItem("movie", movie);
+        renderLastRegistered();
+    }
+});
 
 
 // request API for the videos associated with a movie: https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=<<api_key>>&language=en-US 
