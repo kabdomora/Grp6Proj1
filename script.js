@@ -8,7 +8,7 @@ renderLastRegistered();
 function displayMessage(type, message) {
     msgDiv.textContent = message;
     msgDiv.setAttribute("class", type);
-  }
+}
 
 function renderLastRegistered() {
     var movieEl = localStorage.getItem('movie');
@@ -24,6 +24,7 @@ searchButton.addEventListener('click', function(event) {
     if (movie === "") {
         displayMessage("error", "Please enter a movie title to search the database");
     } else {
+        displayMessage("success", "");
         localStorage.setItem("movie", movie);
         renderLastRegistered();
     }
