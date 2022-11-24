@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Free, Movie reccomendations, user input"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Free, Movie reccomendations, user input">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styledpb.css" />
     <script src="https://cdn.tailwindcss.com?plugins=typography,line-clamp"></script>
 
     <script>
@@ -16,11 +17,11 @@
         theme: {
           extend: {
             colors: {
-              clifford: '#da373d'
-            }
-          }
-        }
-      }
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
     </script>
     <style type="text/tailwindcss">
       @layer components {
@@ -34,81 +35,87 @@
     </style>
 
     <title>Movie Finder</title>
-</head>
-
-<body>
-  
-    <div class="w-full bg-primary p-16">
-    <center>
-      <header>
-        <div class="prose prose-xl">
-          <h1>
-            <span style="color:darkred">Movie</span><span style="color:goldenrod">Finder</span>
-          </h1>
-
-          <p class="italic">Finding something to watch has never been so easy!</p>
-
-          <form action="">
-            <label for="movie-name"></label>
-            <input type="text" name="" id="movie-name" placeholder="Movie Title Here">
+  </head>
+  <body>
 
 
-            <!-- type="button"  was removed after button id below -->
+      <center>
+        <header>
+          <div class="prose prose-xl">
+            <h1>
+              <span style="color: darkred">Movie</span
+              ><span style="color: goldenrod">Finder</span>
+            </h1>
 
-            <button id="fetch-button" class="bg-violet-500 
-            hover:bg-violet-600 
-            focus:outline-none 
-            focus:ring focus:ring-violet-300 
-            active:bg-violet-700 
-            px-5 py-2 text-sm 
-            leading-5 rounded-full 
-            font-semibold text-white">
-              Search
-            </button>
-
-<!-- https://tailwindcss.com/docs/border-radius#pill-buttons -->
-
+            <p class="italic">
+              Finding something to watch has never been so easy!
+            </p>
+          </div>
+          <form id="form">
+              <input type="text" placeholder="Search" id="search" class="search">
           </form>
 
           <div id="msg"></div>
 
+        </header>
+      </center>
+      
+    <section id="displaySearch">
 
-        </div> 
-      </header>
-    </center>
-
-      <section class="grid place-items-center h-180">
-        <iframe width="65%" height="500"
-        src="https://www.youtube.com/embed/6JnN1DmbqoU">
-        </iframe>
-        <span>Movie rating will go here</span>
-        <span id="deletelater">test</span>
-      </section>
-    
-      <section class="h-96">
+      <!-- <section class="h-96">
         <p>Reviews will be listed dynamically here</p>
       </section>
-    
+
       <section class="h-96">
         <p>Recommended titles will be listed dynamically here</p>
-      </section>
-    
+        <div class="movie">
+          <img
+            src="https://images.unsplash.com/photo-1518173835740-f5d14111d76a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=877&q=80"
+            alt="Image"/>
+
+          <div class="movie-info">
+            <h3>Movie Title</h3>
+            <span class="green">9.8</span>
+          </div>
+
+          <div class="overview">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+            laudantium accusamus consequuntur explicabo numquam, totam quia
+            illum dicta? Quod, vitae?
+          </div>
+        </div>
+      </section> -->
+    </section>
+
+    <section>
+      <div id='trailer' class="invisible">
+        TESTING
+      </div>
+    </section>
+
+
+
+
+
+
       <footer class="grid place-items-center">
-        <p class="prose prose-a">Results brought to you by </p>
-        <div class="flex flex-row space-x-5 place-items-center">          
-          <a href="http://www.themoviedb.org"><img src="./images/TMDB-logo.PNG" loading="lazy" width="100" alt="the movie database logo"/></a>
+        <p class="prose prose-a">Results brought to you by</p>
+        <div class="flex flex-row space-x-5 place-items-center">
+          <a href="http://www.themoviedb.org">
+            <img src="./images/TMDB-logo.PNG"
+              loading="lazy"
+              width="100"
+              alt="the movie database logo"/></a>
           <span>and</span>
-          <a href="http://www.utelly.com"><img src="https://uploads-ssl.webflow.com/604fe0b5c0738d69fcb1de55/604fe0b5c0738d2584b1deaa_footer%20logo.svg" loading="lazy" width="100" alt="utelly logo"></a>
-        </div>    
-      </footer>
-
+          <a href="http://www.utelly.com">
+            <img src="https://uploads-ssl.webflow.com/604fe0b5c0738d69fcb1de55/604fe0b5c0738d2584b1deaa_footer%20logo.svg"
+              loading="lazy"
+              width="100"
+              alt="utelly logo"/></a>
+        </div>
+      </footer>      
     </div>
-  
-  
+  </body>
 
-</body>
-
-
-<script src="script.js"></script>
-
+  <script src="scriptdpb.js"></script>
 </html>

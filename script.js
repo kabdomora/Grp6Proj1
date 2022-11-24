@@ -2,10 +2,11 @@ var movieName = document.querySelector('#movie-name');
 var searchButton = document.querySelector('#fetch-button');
 var deleteMe = document.querySelector('#deletelater');
 var msgDiv = document.querySelector("#msg");
+var searchResults = document.querySelector('#results');
 
 window.onload = localStorage.clear();
 
-renderLastRegistered();
+// renderLastRegistered();
 
 function displayMessage(type, message) {
     msgDiv.textContent = message;
@@ -14,8 +15,26 @@ function displayMessage(type, message) {
 
 function renderLastRegistered() {
     var movieEl = localStorage.getItem('movie');
-    deleteMe.textContent = movieEl;
+    let keywordEl = 'https://api.themoviedb.org/3/search/movie?api_key=381ab8d94e41a2bf0c14156c0a527eb2&query='.concat(movieEl);
+    deleteMe.textContent = keywordEl;
 
+    fetch(keywordEl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            searchResults.innerHTML = "";
+
+            for (var i=0; i < data.length; i++) {
+                var movieTitle = document.createElement('h3');
+                // var moviePic = document.createElement('img');
+                movieTitle.textContent = data[i].results.title;
+                // moviePic.src = data[i].poster_path;
+                searchResults.append(movieTitle);
+                // searchResults.append(moviePic);
+            }
+        });
 }
 
 searchButton.addEventListener('click', function(event) {
@@ -27,10 +46,15 @@ searchButton.addEventListener('click', function(event) {
         displayMessage("error", "Please enter a movie title to search the database");
     } else {
         displayMessage("success", "");
+        movie = movie.replace(/\s+/g, '+').toLowerCase();
         localStorage.setItem("movie", movie);
         renderLastRegistered();
     }
 });
+
+function getApi() {
+    var requestUrl = 'https://api.themoviedb.org/3/movie/550/videos?api_key=381ab8d94e41a2bf0c14156c0a527eb2&language=en-US';
+}
 
 
 // request API for the videos associated with a movie: https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=<<api_key>>&language=en-US 
