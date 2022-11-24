@@ -53,15 +53,20 @@ function movieTrailer() {
         return response.json();
     })
     .then(function (data) {
-        let { key } = data.results[0];
+        // let { key } = data.results[0];
         trailer.innerHTML = '';
 
-        let callVideo = 'https://www.youtube.com/embed/'.concat(key);
-        const videoEl = document.createElement('iframe');
-        videoEl.setAttribute('width', "65%");
-        videoEl.setAttribute('height', "500");
-        videoEl.setAttribute('src', callVideo);
-        trailer.appendChild(videoEl);
+        data.results.forEach((value, index) => {
+            if (index > 0) {
+                var key = value.key
+                let callVideo = 'https://www.youtube.com/embed/'.concat(key);
+                const videoEl = document.createElement('iframe');
+                videoEl.setAttribute('width', "65%");
+                videoEl.setAttribute('height', "500");
+                videoEl.setAttribute('src', callVideo);
+                trailer.appendChild(videoEl);
+            }
+        })       
     })
 
 
