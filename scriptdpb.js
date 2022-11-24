@@ -43,6 +43,7 @@ form.addEventListener('submit', (e) => {
 // use after api call
 
 function movieTrailer() {
+    displaySearch.innerHTML = '';
     var selected = localStorage.getItem('movieID');
     let pullMovie = BASE_URL.concat('/movie/', selected, '/videos?', API_KEY, '&language=en-US');
     var trailer = document.getElementById('trailer');

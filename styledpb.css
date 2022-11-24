@@ -46,7 +46,6 @@ body{
 }
 
 #displaySearch{
-  position: absolute;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
