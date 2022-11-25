@@ -26,8 +26,12 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const searchTerm = search.value;
+    
     var trailer = document.getElementById('trailer');
     trailer.innerHTML = '';
+
+    var poster = document.getElementById('poster');
+    poster.innerHTML = "";
 
     if(searchTerm) {
         getMovies(searchURL+'&query='+searchTerm)
@@ -44,8 +48,17 @@ form.addEventListener('submit', (e) => {
 
 
 function moviePoster() {
-    var selected = localStorage.getItem('posterPath');
+    var posterPath = localStorage.getItem('posterPath');
     var poster = document.getElementById('poster');
+
+    poster.innerHTML = " ";
+
+    var imgPoster = document.createElement('img');
+    imgPoster.setAttribute('src', IMG_URL.concat(posterPath));
+    imgPoster.setAttribute('alt', "Movie poster");
+
+    poster.appendChild(imgPoster);
+
 }
 
 
@@ -135,6 +148,7 @@ function showMovies(data) {
             var splitIDs = index.split("-");
             localStorage.setItem('movieID', splitIDs[0]);  
             localStorage.setItem('posterPath', splitIDs[1]);
+            moviePoster();
             movieTrailer();
             
         }
