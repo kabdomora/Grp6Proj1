@@ -26,6 +26,8 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const searchTerm = search.value;
+    var trailer = document.getElementById('trailer');
+    trailer.innerHTML = '';
 
     if(searchTerm) {
         getMovies(searchURL+'&query='+searchTerm)
@@ -35,7 +37,8 @@ form.addEventListener('submit', (e) => {
 
     displaySearch.style.visibility = 'visible';
     search.value = '';
-    trailer.innerHTML = '';
+
+    
 
 })
 
@@ -60,18 +63,23 @@ function movieTrailer() {
             if (index > 0) {
                 var key = value.key
                 let callVideo = 'https://www.youtube.com/embed/'.concat(key);
+                
                 const videoEl = document.createElement('iframe');
-                videoEl.setAttribute('width', "65%");
-                videoEl.setAttribute('height', "500");
+                videoEl.setAttribute('class', "flex flex-row shrink-0 w-80 h-40 rounded-lg shadow-xl bg-white");                
                 videoEl.setAttribute('src', callVideo);
+                
                 trailer.appendChild(videoEl);
-            }
-        })       
+            } 
+   
+        })   
+        
     })
 
 
-    trailer.setAttribute('class', 'py-5 grid place-items-center h-180 visible');
+    trailer.setAttribute('class', 'flex flex-row relative rounded-xl overflow-auto');
 }
+
+
 
 function showMovies(data) {
     displaySearch.innerHTML = '';
@@ -96,7 +104,7 @@ function showMovies(data) {
                 ${overview}
             </div>
         
-        `
+        `;
 
         displaySearch.appendChild(movieEl);
         
@@ -112,7 +120,7 @@ function showMovies(data) {
             movie.splice(index, 1);
             localStorage.setItem('movieID', index);  
             movieTrailer();
-            displaySearch.style.visibility = 'collapse';
+            
         }
     });
 
