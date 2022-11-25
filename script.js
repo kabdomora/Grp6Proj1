@@ -42,8 +42,13 @@ form.addEventListener('submit', (e) => {
 
 })
 
-// location.href = redirectUrl;
-// use after api call
+
+function moviePoster() {
+    var selected = localStorage.getItem('posterPath');
+    var poster = document.getElementById('poster');
+}
+
+
 
 function movieTrailer() {
     displaySearch.innerHTML = '';
@@ -58,6 +63,11 @@ function movieTrailer() {
     .then(function (data) {
         // let { key } = data.results[0];
         trailer.innerHTML = '';
+        console.log(data);
+
+        var trailerHeader = document.createElement('h3');
+        trailerHeader.setAttribute('class', "flex flex-row px-20 text-xl font-sans font-extrabold py-5 underline");
+        trailerHeader.innerHTML = 'Trailers and Other Videos';
 
         data.results.forEach((value, index) => {
             if (index > 0) {
@@ -65,10 +75,13 @@ function movieTrailer() {
                 let callVideo = 'https://www.youtube.com/embed/'.concat(key);
                 
                 const videoEl = document.createElement('iframe');
-                videoEl.setAttribute('class', "flex flex-row shrink-0 w-80 h-40 rounded-lg shadow-xl bg-white");                
+                videoEl.setAttribute('class', "flex flex-row shrink-0 w-80 h-40 rounded-lg shadow-xl bg-white mx-5");                
                 videoEl.setAttribute('src', callVideo);
-                
-                trailer.appendChild(videoEl);
+
+               
+
+                trailerHeader.appendChild(videoEl);
+                trailer.appendChild(trailerHeader);
             } 
    
         })   
@@ -96,7 +109,7 @@ function showMovies(data) {
                 <span class="${getColor(vote_average)}">${vote_average}</span>
             </div>
             <div class="overview">
-                <h3 id=${id}>Overview: 
+                <h3 id=${id}-${poster_path}>Overview: 
                 <button id="movie-button">Go To Movie 👉
                 <span id='movieID' class='text-xs invisible'>${id}</span>
                 </button>
@@ -118,7 +131,10 @@ function showMovies(data) {
         if (element.matches('button') === true) {
             var index = element.parentElement.getAttribute('id');
             movie.splice(index, 1);
-            localStorage.setItem('movieID', index);  
+            console.log(index);
+            var splitIDs = index.split("-");
+            localStorage.setItem('movieID', splitIDs[0]);  
+            localStorage.setItem('posterPath', splitIDs[1]);
             movieTrailer();
             
         }
