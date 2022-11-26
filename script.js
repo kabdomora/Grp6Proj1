@@ -51,6 +51,19 @@ function moviePoster() {
     var posterPath = localStorage.getItem('posterPath');
     var poster = document.getElementById('poster');
 
+    var overview = localStorage.getItem('overview');
+    if(overview) {
+        overview = overview.replaceAll('*', ' ');
+        localStorage.setItem('overview', overview);
+    }
+
+
+    var movieTitle = localStorage.getItem('movieTitle');
+    if(movieTitle) {
+        movieTitle = movieTitle.replaceAll('*', ' ');
+        localStorage.setItem('movieTitle', movieTitle);
+    }
+
     poster.innerHTML = " ";
 
     var imgPoster = document.createElement('img');
@@ -112,6 +125,10 @@ function showMovies(data) {
 
     data.forEach(movie => {
         const {title, poster_path, vote_average, overview, id} = movie;
+
+        ovID = overview.replace(/\s+/g, '*');
+        movieID = title.replace(/\s+/g, '*');
+
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.setAttribute('id', id);
@@ -122,7 +139,7 @@ function showMovies(data) {
                 <span class="${getColor(vote_average)}">${vote_average}</span>
             </div>
             <div class="overview">
-                <h3 id=${id}-${poster_path}>Overview: 
+                <h3 id=${id}+${poster_path}+${vote_average}+${ovID}+${movieID}>Overview: 
                 <button id="movie-button">Go To Movie 👉
                 <span id='movieID' class='text-xs invisible'>${id}</span>
                 </button>
@@ -145,9 +162,13 @@ function showMovies(data) {
             var index = element.parentElement.getAttribute('id');
             movie.splice(index, 1);
             console.log(index);
-            var splitIDs = index.split("-");
+            var splitIDs = index.split("+");
             localStorage.setItem('movieID', splitIDs[0]);  
             localStorage.setItem('posterPath', splitIDs[1]);
+            localStorage.setItem('movieRating', splitIDs[2]);
+            localStorage.setItem('overview', splitIDs[3]);
+            localStorage.setItem('movieTitle', splitIDs[4]);
+
             moviePoster();
             movieTrailer();
             
