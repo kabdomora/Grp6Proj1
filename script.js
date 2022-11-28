@@ -10,6 +10,7 @@ const search = document.getElementById('search');
 
 var movie = [];
 var redirectUrl = './MoviePage.html'
+var stream = document.getElementById('streaming');
 
 getMovies(API_URL);
 
@@ -64,17 +65,126 @@ function moviePoster() {
         localStorage.setItem('movieTitle', movieTitle);
     }
 
-    poster.innerHTML = " ";
+    poster.innerHTML = "";
 
-    var imgPoster = document.createElement('img');
-    imgPoster.setAttribute('src', IMG_URL.concat(posterPath));
-    imgPoster.setAttribute('alt', "Movie poster");
+    var vote = localStorage.getItem('movieRating');
+    var title = localStorage.getItem('movieTitle');
 
-    poster.appendChild(imgPoster);
+    poster.innerHTML = `
+    <img src="${IMG_URL+posterPath}" alt="Movie Poster">
+   <div class="movie-info">
+       <h3>${title}</h3>
+       <span class="${getColor(vote)}">${vote}</span>
+   </div>
+
+`;
+
+
+/* <div class="overview"> */
+//        <h3 id=${id}+${poster_path}+${vote_average}+${ovID}+${movieID}>Overview: 
+//        <button id="movie-button">Go To Movie 👉
+//        <span id='movieID' class='text-xs invisible'>${id}</span>
+//        </button>
+//        </h3>
+//        ${overview}
+//    </div>
+
+
+    // var imgPoster = document.createElement('img');
+    // imgPoster.setAttribute('src', IMG_URL.concat(posterPath));
+    // imgPoster.setAttribute('alt', "Movie poster");
+
+    // poster.appendChild(imgPoster);
+
+}
+
+function streamHere() {
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '3e05fc6e07msha3ef85533b3b988p12197cjsna8507f3b33d3',
+            'X-RapidAPI-Host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
+        }
+    };
+    
+    var selected = localStorage.getItem('movieID');
+    let pullServices = 'https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?source_id=movie%2F'.concat(selected, '&source=tmdb&country=us');
+    
+
+    stream.innerHTML = "";
+    
+    fetch(pullServices, options)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);                   
+
+            data.collection.locations.forEach((value, index) => {
+                
+                if (index >= 0) {
+                    var logo = value.icon;
+                    var name = value.display_name;
+                    var link = value.url;
+
+                    const streamOptions = document.createElement('button');
+                    streamOptions.setAttribute('id', "streamingOptions");
+                    streamOptions.setAttribute('class', `
+                            bg-cyan-800 
+                            hover:bg-cyan-600 
+                            focus:outline-none 
+                            focus:ring focus:ring-cyan-300 
+                            active:bg-cyan-700 
+                            px-10 py-2 text-sm 
+                            leading-5 rounded-full 
+                            font-semibold text-white
+                    `);
+
+                    
+                    streamOptions.innerHTML = `
+                    <a href="${link}">
+                    <img src="${logo}" alt="${name}">
+                    </a>         
+               `;
+
+
+                stream.appendChild(streamOptions); 
+                
+                
+
+                console.log(logo);
+                console.log(name);
+                console.log(link);
+
+                }
+            })
+
+            
+        })
+        .catch(err => console.error(err));
 
 }
 
 
+
+// function removeDup(streamOptions) {
+//     let result = []
+//     streamOptions.forEach((item, index) => { if (result.indexOf(item) === -1) result.push(item) });
+//     return result;
+//     }
+
+// removeDup();
+
+
+function movieDetails() {
+    var Title = localStorage.getItem('movieTitle');
+    var OverV = localStorage.getItem('overview');
+    var TitleDiv = document.getElementById('movieTitle');
+    var OverDiv = document.getElementById('overview');
+
+    TitleDiv.innerHTML = Title;
+    OverDiv.innerHTML = OverV;
+}
 
 function movieTrailer() {
     displaySearch.innerHTML = '';
@@ -96,7 +206,7 @@ function movieTrailer() {
         trailerHeader.innerHTML = 'Trailers and Other Videos';
 
         data.results.forEach((value, index) => {
-            if (index > 0) {
+            if (index >= 0) {
                 var key = value.key
                 let callVideo = 'https://www.youtube.com/embed/'.concat(key);
                 
@@ -117,6 +227,7 @@ function movieTrailer() {
 
     trailer.setAttribute('class', 'flex flex-row relative rounded-xl overflow-auto');
 }
+
 
 
 
@@ -171,6 +282,8 @@ function showMovies(data) {
 
             moviePoster();
             movieTrailer();
+            streamHere();
+            movieDetails();
             
         }
     });
