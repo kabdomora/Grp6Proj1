@@ -321,6 +321,14 @@ movieTile.addEventListener('click', function(event) {
     }
 });
 
+var refresh = document.getElementById('headRefresh');
+
+const refreshPage = () => {
+    location.reload();
+}
+
+refresh.addEventListener('click', refreshPage);
+
 
 function getColor(vote) {
     if(vote>= 8){
