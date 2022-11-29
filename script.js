@@ -316,6 +316,7 @@ movieTile.addEventListener('click', function(event) {
         movieTrailer();
         streamHere();
         movieDetails();
+        similarRecommendations();
         
     }
 });
