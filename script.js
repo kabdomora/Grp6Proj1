@@ -246,8 +246,8 @@ function similarRecommendations() {
         recommendedHeader.innerHTML = 'Similar Recommendations';
         similar.appendChild(recommendedHeader);
 
-        data.results.forEach(movie2 => {
-            const {title, poster_path, vote_average, overview, id} = movie2;
+        data.results.forEach(movie => {
+            const {title, poster_path, vote_average, overview, id} = movie;
             const similarEl = document.createElement('div');
             similarEl.classList.add('movieSimilar');
             similarEl.setAttribute('id', id);
@@ -309,6 +309,8 @@ function showMovies(data) {
         
     })
 
+}
+
     var movieTile = document.querySelector('#displaySearch');
     
     movieTile.addEventListener('click', function(event) {
@@ -333,9 +335,6 @@ function showMovies(data) {
             
         }
     });
-
-}
-
 
 function getColor(vote) {
     if(vote>= 8){
