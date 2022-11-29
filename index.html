@@ -36,98 +36,99 @@
 
     <title>Movie Finder</title>
   </head>
-  <body>
+  <body class="block">
 
 
-      <center>
-        <header>
-          <div class="prose prose-xl">
-            <h1>
-              <span style="color: darkred">Movie</span
-              ><span style="color: goldenrod">Finder</span>
-            </h1>
+  <center>
+    <header>
+      <div class="prose prose-xl">
+        <h1>
+          <span style="color: darkred">Movie</span
+          ><span style="color: goldenrod">Finder</span>
+        </h1>
 
-            <p class="italic">
-              Finding something to watch has never been so easy!
-            </p>
-          </div>
-          <form id="form">
-              <input type="text" placeholder="Search" id="search" class="search">
-          </form>
+        <p class="italic">
+          Finding something to watch has never been so easy!
+        </p>
+      </div>
+      <form id="form">
+          <input type="text" placeholder="Search" id="search" class="search">
+      </form>
 
-          <div id="msg"></div>
+      <div id="msg"></div>
 
-        </header>
-      </center>
+    </header>
+  </center>
+
       
-    <section id="displaySearch">
+  <section class="absolute mb-5" id="displaySearch">
 
-      <!-- <section class="h-96">
-        <p>Reviews will be listed dynamically here</p>
-      </section>
-
-      <section class="h-96">
-        <p>Recommended titles will be listed dynamically here</p>
-        <div class="movie">
-          <img
-            src="https://images.unsplash.com/photo-1518173835740-f5d14111d76a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=877&q=80"
-            alt="Image"/>
-
-          <div class="movie-info">
-            <h3>Movie Title</h3>
-            <span class="green">9.8</span>
-          </div>
-
-          <div class="overview">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-            laudantium accusamus consequuntur explicabo numquam, totam quia
-            illum dicta? Quod, vitae?
-          </div>
-        </div>
-      </section> -->
+    <!-- <section class="h-96">
+      <p>Reviews will be listed dynamically here</p>
     </section>
 
-    <section class="flex flex-row">
-      <div class="flex flex-col">
-        <div class="pl-10" id="poster"></div>   
-          
+    <section class="h-96">
+      <p>Recommended titles will be listed dynamically here</p>
+      <div class="movie">
+        <img
+          src="https://images.unsplash.com/photo-1518173835740-f5d14111d76a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=877&q=80"
+          alt="Image"/>
+
+        <div class="movie-info">
+          <h3>Movie Title</h3>
+          <span class="green">9.8</span>
+        </div>
+
+        <div class="overview">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+          laudantium accusamus consequuntur explicabo numquam, totam quia
+          illum dicta? Quod, vitae?
+        </div>
       </div>
-      <div class ="flex flex-col">
-        <div id="movieTitle" class="p-10">Movie Title Here</div>
+    </section> -->
+  </section>
+
+  <section class="flex flex-row">
+    <div class="flex flex-col">
+      <div class="pl-10" id="poster"></div>   
         
-        <div id="overview" class="p-10">Overview Here</div>
-        <div class="flex flex-row p-10" id="streaming"></div> 
-      </div>
-    </section>
-
-    <section id="trailer" class="flex-row">
-      <h3 id="trailerHeader" class="text-xl font-sans font-extrabold py-5 underline"></h3>
-   
-    </section>
-
-
-
-
-
-
-      <footer class="grid place-items-center bottom-0">
-        <p class="prose prose-a">Results brought to you by</p>
-        <div class="flex flex-row space-x-5 place-items-center">
-          <a href="http://www.themoviedb.org">
-            <img src="./images/TMDB-logo.PNG"
-              loading="lazy"
-              width="100"
-              alt="the movie database logo"/></a>
-          <span>and</span>
-          <a href="http://www.utelly.com">
-            <img src="https://uploads-ssl.webflow.com/604fe0b5c0738d69fcb1de55/604fe0b5c0738d2584b1deaa_footer%20logo.svg"
-              loading="lazy"
-              width="100"
-              alt="utelly logo"/></a>
-        </div>
-      </footer>      
     </div>
-  </body>
+    <div class ="flex flex-col">
+      <div id="movieTitle" class="p-10"></div>
+      
+      <div id="overview" class="p-10"></div>
+      <div class="flex flex-row p-10" id="streaming"></div> 
+    </div>
+  </section>
+
+  <section id="trailer" class="flex-row">
+    <h3 id="trailerHeader" class="text-xl font-sans font-extrabold py-5 underline"></h3>
+
+  </section>
+
+  <section id="similar" class="flex-row">
+    <h3 id="recommendedHeader" class="text-xl font-sans font-extrabold py-5 underline"></h3>
+  </section>
+
+  <footer class="mt-5 grid place-items-center bottom-0">
+    <p class="prose prose-a">Results brought to you by</p>
+    <div class="flex flex-row space-x-5 place-items-center">
+      <a href="http://www.themoviedb.org">
+        <img src="./images/TMDB-logo.PNG"
+          loading="lazy"
+          width="100"
+          alt="the movie database logo"/></a>
+      <span>and</span>
+      <a href="http://www.utelly.com">
+        <img src="https://uploads-ssl.webflow.com/604fe0b5c0738d69fcb1de55/604fe0b5c0738d2584b1deaa_footer%20logo.svg"
+          loading="lazy"
+          width="100"
+          alt="utelly logo"/></a>
+    </div>
+  </footer>      
+
+</body>
+  
 
   <script src="script.js"></script>
 </html>
