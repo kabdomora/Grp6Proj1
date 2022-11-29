@@ -259,7 +259,6 @@ function similarRecommendations() {
              </div>
              <div class="overview">
                <h3 id=${id}-${poster_path}>Overview: 
-               <button id="movie-button">Go To Movie 👉
                <span id='movieID' class='text-xs invisible'>${id}</span>
                </button>
                </h3>
