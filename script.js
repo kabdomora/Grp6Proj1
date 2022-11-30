@@ -11,6 +11,7 @@ const search = document.getElementById('search');
 var movie = [];
 var redirectUrl = './MoviePage.html'
 var stream = document.getElementById('streaming');
+var reviews = document.getElementById('reviews');
 
 getMovies(API_URL);
 
@@ -208,6 +209,20 @@ function movieTrailer() {
 
 
     trailer.setAttribute('class', 'flex flex-row relative rounded-xl overflow-auto');
+}
+
+function movieReviews() {
+    var selected = localStorage.getItem('movieID');
+    let getReviews = BASE_URL.concat('/movie/', selected, '/reviews?', API_KEY, '&language=en-US&page=1');
+    var reviewCard = document.getElementById(reviews);
+
+    fetch(getReviews)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
 }
 
 
