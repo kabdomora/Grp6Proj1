@@ -1,0 +1,22 @@
+
+@layer components {
+  .bg-primary {
+    @apply bg-gradient-to-br 
+from-red-100 
+to-blue-400 
+via-gray-200;
+  }
+}
+
+
+
+
+
+.shadow {
+    shadow-md 
+    shadow:[#1DA1F2]/40
+}
+
+.center {
+  text-align: center;
+}
