@@ -223,11 +223,14 @@ function movieReviews() {
     })
     .then(function (data) {
         console.log(data);
+        var totalReviews = data.total_results;
 
         var reviewHeader = document.createElement('h3');
         reviewHeader.setAttribute('class', "flex flex-col px-10 text-xl font-sans font-extrabold py-5");
-        reviewHeader.innerHTML = "Consumer Reviews";
+        reviewHeader.innerHTML = `Consumer Reviews: ${totalReviews}`;
         reviews.appendChild(reviewHeader);
+
+        
         
         data.results.forEach((value, index) => {
             if (index >=0) {
