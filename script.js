@@ -4,6 +4,19 @@ const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const searchURL = BASE_URL + '/search/movie?'+API_KEY;
 
+const RAPIDAPI_APIDOJO_APIKEY = '1e054f74f0msh3a85f5fe15bc6bfp1b30e3jsn7da6ddb61b2e'
+const RAPIDAPI_APIDOJO_BASEURL = 'https://imdb8.p.rapidapi.com'
+const RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_ENDPOINT = '/title/get-user-reviews'
+const RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_URL = `${RAPIDAPI_APIDOJO_BASEURL}${RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_ENDPOINT}`
+
+const RAPIDAPI_APIDOJO_OPTIONS = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': `${RAPIDAPI_APIDOJO_APIKEY}`,
+        'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+    }
+};
+
 const displaySearch = document.getElementById('displaySearch');
 const form =  document.getElementById('form');
 const search = document.getElementById('search');
@@ -96,6 +109,87 @@ function moviePoster() {
 
     // poster.appendChild(imgPoster);
 
+}
+
+function get_imdb_id() {
+    const movie_id = localStorage.getItem('movieID')
+    const movieDetailsURL = `${BASE_URL}/movie/${movie_id}?${API_KEY}`
+
+    // get movie's imdb_id to use with apidojo API and get user reviews
+    fetch(movieDetailsURL)
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem('imdb_id', data.imdb_id)
+        })
+}
+
+function movieReviews() {
+    const imdb_id = localStorage.getItem('imdb_id')
+    const reviews = document.getElementById('reviews')
+
+    const movie_review_url = `${RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_URL}?tconst=${imdb_id}`
+    fetch(movie_review_url, RAPIDAPI_APIDOJO_OPTIONS)
+        .then(res => res.json())
+        .then(data => {
+
+            let total_reviews = data.reviews.length
+
+            let reviewHeader = document.createElement('h3');
+            reviewHeader.setAttribute('class', "flex flex-col px-10 text-xl font-sans font-extrabold py-5");
+            reviewHeader.innerHTML = `Consumer Reviews: ${total_reviews}`;
+            reviews.appendChild(reviewHeader);
+
+            // sort reviews by helpfulnessScore
+            data.reviews.sort((a, b) => b.helpfulnessScore - a.helpfulnessScore)
+
+            data.reviews.forEach((value, index) => {
+                if (index >=0) {
+                    var userName = value.author.displayName
+                    var authorRating = value.authorRating
+                    var scoreValue = value.helpfulnessScore.toFixed(3)
+                    var reviewBody = value.reviewText
+
+                    const reviewCard = document.createElement('div')
+                    reviewCard.setAttribute('class', `
+                            movie-review-card
+                            pl-10
+                            container
+                            w-full
+                            rounded-lg
+                            border-4
+                            border-b-slate-400
+                        `);
+                    reviewCard.setAttribute('id', 'reviewCard')
+
+                    let reviewedByPEl = document.createElement('p')
+                    reviewedByPEl.setAttribute('class', 'font-bold text xl no-underline')
+                    reviewedByPEl.setAttribute('id', 'reviewed-by')
+                    reviewedByPEl.innerHTML = `Reviewed by: ${userName}`
+
+                    let authorRatingPEl = document.createElement('p')
+                    authorRatingPEl.setAttribute('class', 'italic text-sm underline mb-5')
+                    authorRatingPEl.setAttribute('id', 'author-rating')
+                    authorRatingPEl.innerHTML = `${authorRating}`
+
+                    let scoreValuePEl = document.createElement('p')
+                    scoreValuePEl.setAttribute('class', 'font-bold text-xl no-underline')
+                    scoreValuePEl.setAttribute('id', 'score-value')
+                    scoreValuePEl.innerHTML = `${scoreValue}`
+
+                    let contentPEl = document.createElement('p')
+                    contentPEl.setAttribute('class', 'font-medium text-base no-underline')
+                    contentPEl.setAttribute('id', 'content')
+                    contentPEl.innerHTML = `${reviewBody}`
+
+                    reviewCard.appendChild(authorRatingPEl)
+                    reviewCard.appendChild(scoreValuePEl)
+                    reviewCard.appendChild(contentPEl)
+
+                    reviews.appendChild(reviewCard)
+                }
+            })
+        })
+        .catch(err => console.error(err))
 }
 
 function streamHere() {
@@ -281,6 +375,8 @@ function showMovies(data) {
             localStorage.setItem('movieTitle', splitIDs[4]);
 
             moviePoster();
+            get_imdb_id();
+            movieReviews();
             movieTrailer();
             streamHere();
             movieDetails();
@@ -300,9 +396,6 @@ function getColor(vote) {
         return 'red'
     }
 }
-
-
-
 
 
 

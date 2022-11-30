@@ -114,3 +114,9 @@ body{
 .movie:hover .overview{
   transform:translateY(0)
 }
+
+.movie-review-card {
+  height: 15em;
+  margin: 3em;
+  padding: .5em;
+}
