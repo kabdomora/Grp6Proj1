@@ -212,9 +212,10 @@ function movieTrailer() {
 }
 
 function movieReviews() {
+    reviews.innerHTML = '';
     var selected = localStorage.getItem('movieID');
     let getReviews = BASE_URL.concat('/movie/', selected, '/reviews?', API_KEY, '&language=en-US&page=1');
-    var reviewCard = document.getElementById(reviews);
+    
 
     fetch(getReviews)
     .then(function (response) {
@@ -222,6 +223,45 @@ function movieReviews() {
     })
     .then(function (data) {
         console.log(data);
+
+        var reviewHeader = document.createElement('h3');
+        reviewHeader.setAttribute('class', "flex flex-col px-10 text-xl font-sans font-extrabold py-5");
+        reviewHeader.innerHTML = "Consumer Reviews";
+        reviews.appendChild(reviewHeader);
+        
+        data.results.forEach((value, index) => {
+            if (index >=0) {
+                var userName = value.author;
+                var reviewDate = value.created_at;
+                var scoreValue = value.author_details.rating;
+                var reviewBody = value.content;
+
+                const reviewCard = document.createElement('div');
+                reviewCard.setAttribute('class', `
+                        pl-10 
+                        container 
+                        w-full 
+                        rounded-lg 
+                        border-4 
+                        border-b-slate-400
+                    `);
+                reviewCard.setAttribute('id', 'reviewCard');
+
+                reviewCard.innerHTML = `
+                <p id="reviewed-by" class="font-bold text xl no-underline">
+                    Reviewed by: ${userName}</p>
+                <p id="created-at" class="italic text-sm underline mb-5">
+                    ${reviewDate}</p>
+                <p id="rating" class="font-bold text-xl no-underline">
+                    ${scoreValue}</p>
+                <p id="content" class="font-medium text-base no-underline">
+                    ${reviewBody}</p>
+                `;
+
+                reviewHeader.appendChild(reviewCard);
+            }
+        })
+        
     })
 }
 
@@ -332,6 +372,7 @@ movieTile.addEventListener('click', function(event) {
         streamHere();
         movieDetails();
         similarRecommendations();
+        movieReviews();
         
     }
 });
