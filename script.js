@@ -35,6 +35,21 @@ form.addEventListener('submit', (e) => {
     var poster = document.getElementById('poster');
     poster.innerHTML = "";
 
+    var similar = document.getElementById('similar');
+    similar.innerHTML = "";
+
+    var reviews = document.getElementById('reviews');
+    reviews.innerHTML = "";
+
+    var movieTitle = document.getElementById('movieTitle');
+    movieTitle.innerHTML = "";
+
+    var overview = document.getElementById('overview');
+    overview.innerHTML = "";
+
+    var streaming = document.getElementById('streaming');
+    streaming.innerHTML = "";
+
     if(searchTerm) {
         getMovies(searchURL+'&query='+searchTerm)
     }else{
@@ -227,11 +242,12 @@ function movieReviews() {
 
         var reviewHeader = document.createElement('button');
         reviewHeader.setAttribute('class', "accordion px-10 text-xl font-sans font-extrabold py-5");
-        reviewHeader.innerHTML = `Consumer Reviews: ${totalReviews}`;
+        reviewHeader.innerHTML = `⛛ Consumer Reviews: ${totalReviews}`;
         reviews.appendChild(reviewHeader);
 
         var reviewBody = document.createElement('div');
         reviewBody.setAttribute('class', "panel");
+        localStorage.setItem('total-reviews', totalReviews);
         
         
         data.results.forEach((value, index) => {
@@ -268,37 +284,42 @@ function movieReviews() {
 
 // tester code accordion
 
-var acc = document.getElementsByClassName("accordion");
-var i;
+// var acc = document.getElementsByClassName("accordion");
+// var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
-}
+// for (i = 0; i < acc.length; i++) {
+//   acc[i].addEventListener("click", function() {
+//     this.classList.toggle("active");
+//     var panel = this.nextElementSibling;
+//     if (panel.style.maxHeight) {
+//       panel.style.maxHeight = null;
+//     } else {
+//       panel.style.maxHeight = panel.scrollHeight + "px";
+//     }
+//   });
+// }
+
+// tester code accordion
 
 reviews.addEventListener('click', function(event) {
     var element = event.target;
+    var totalReviews = localStorage.getItem('total-reviews');
 
     if (element.matches('button') === true) {
         var button = this.firstChild;
         button.classList.toggle("active");
+        button.innerHTML = `Consumer Reviews: ${totalReviews}`;
         var panel = button.nextElementSibling;
         if (panel.style.maxHeight) {
           panel.style.maxHeight = null;
+          button.innerHTML = `⛛ Consumer Reviews: ${totalReviews}`;
         } else {
           panel.style.maxHeight = panel.scrollHeight + "px";
         }
     }
 })
 
-// tester code accordion
+
 
 
 function similarRecommendations() {
@@ -321,6 +342,10 @@ function similarRecommendations() {
 
         data.results.forEach(movie => {
             const {title, poster_path, vote_average, overview, id} = movie;
+
+            ovID = overview.replace(/\s+/g, '*');
+            movieID = title.replace(/\s+/g, '*');
+
             const similarEl = document.createElement('div');
             similarEl.classList.add('movieSimilar');
             similarEl.setAttribute('id', id);
@@ -331,7 +356,7 @@ function similarRecommendations() {
                <span class="${getColor(vote_average)}">${vote_average}</span>
              </div>
              <div class="overview">
-               <h3 id=${id}-${poster_path}>Overview: 
+               <h3 id=${id}+${poster_path}+${vote_average}+${ovID}+${movieID}>Overview: 
                <button id="movie-button">Go To Movie 👉
                <span id='movieID' class='text-xs invisible'>${id}</span>
                </button>
@@ -412,13 +437,30 @@ movieTile.addEventListener('click', function(event) {
     }
 });
 
-var refresh = document.getElementById('headRefresh');
+similar.addEventListener('click', function(event) {
+    var element = event.target;
 
-const refreshPage = () => {
-    location.reload();
-}
+    if (element.matches('button') === true) {
+        var index = element.parentElement.getAttribute('id');
+        movie.splice(index, 1);
+        console.log(index);
+        var splitIDs = index.split("+");
+        localStorage.setItem('movieID', splitIDs[0]);  
+        localStorage.setItem('posterPath', splitIDs[1]);
+        localStorage.setItem('movieRating', splitIDs[2]);
+        localStorage.setItem('overview', splitIDs[3]);
+        localStorage.setItem('movieTitle', splitIDs[4]);
 
-refresh.addEventListener('click', refreshPage);
+        moviePoster();
+        movieTrailer();
+        streamHere();
+        movieDetails();
+        similarRecommendations();
+        movieReviews();
+        
+    }
+});
+
 
 
 function getColor(vote) {
