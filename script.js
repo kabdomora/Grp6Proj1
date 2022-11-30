@@ -225,11 +225,13 @@ function movieReviews() {
         console.log(data);
         var totalReviews = data.total_results;
 
-        var reviewHeader = document.createElement('h3');
-        reviewHeader.setAttribute('class', "flex flex-col px-10 text-xl font-sans font-extrabold py-5");
+        var reviewHeader = document.createElement('button');
+        reviewHeader.setAttribute('class', "accordion px-10 text-xl font-sans font-extrabold py-5");
         reviewHeader.innerHTML = `Consumer Reviews: ${totalReviews}`;
         reviews.appendChild(reviewHeader);
 
+        var reviewBody = document.createElement('div');
+        reviewBody.setAttribute('class', "panel");
         
         
         data.results.forEach((value, index) => {
@@ -237,7 +239,7 @@ function movieReviews() {
                 var userName = value.author;
                 var reviewDate = value.created_at;
                 var scoreValue = value.author_details.rating;
-                var reviewBody = value.content;
+                var reviewContent = value.content;
 
                 const reviewCard = document.createElement('div');
                 reviewCard.setAttribute('class', `
@@ -251,22 +253,43 @@ function movieReviews() {
                 reviewCard.setAttribute('id', 'reviewCard');
 
                 reviewCard.innerHTML = `
-                <p id="reviewed-by" class="font-bold text xl no-underline">
+                <p id="reviewed-by" class="font-bold text-xl">
                     Reviewed by: ${userName}</p>
                 <p id="created-at" class="italic text-sm underline mb-5">
                     ${reviewDate}</p>
-                <p id="rating" class="font-bold text-xl no-underline">
+                <p id="rating" class="font-bold text-xl">
                     ${scoreValue}</p>
-                <p id="content" class="font-medium text-base no-underline">
-                    ${reviewBody}</p>
+                <p id="content" class="font-medium text-base">
+                    ${reviewContent}</p>
                 `;
 
-                reviewHeader.appendChild(reviewCard);
+                reviewBody.appendChild(reviewCard);                
             }
         })
+
+        reviews.appendChild(reviewBody);
         
     })
 }
+
+// tester code accordion
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
+// tester code accordion
 
 
 function similarRecommendations() {
@@ -398,6 +421,9 @@ function getColor(vote) {
         return 'red'
     }
 }
+
+
+
 
 
 
