@@ -242,15 +242,9 @@ function movieReviews() {
                 var reviewContent = value.content;
 
                 const reviewCard = document.createElement('div');
-                reviewCard.setAttribute('class', `
-                        pl-10 
-                        container 
-                        w-full 
-                        rounded-lg 
-                        border-4 
-                        border-b-slate-400
-                    `);
-                reviewCard.setAttribute('id', 'reviewCard');
+                reviewCard.setAttribute('id', 'card');
+                reviewCard.setAttribute('class', "pl-10 container w-full rounded-lg border-4 border-b-slate-400");
+                
 
                 reviewCard.innerHTML = `
                 <p id="reviewed-by" class="font-bold text-xl">
@@ -288,6 +282,21 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 }
+
+reviews.addEventListener('click', function(event) {
+    var element = event.target;
+
+    if (element.matches('button') === true) {
+        var button = this.firstChild;
+        button.classList.toggle("active");
+        var panel = button.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    }
+})
 
 // tester code accordion
 
