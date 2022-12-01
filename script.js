@@ -158,15 +158,21 @@ function streamHere() {
                     const streamOptions = document.createElement('button');
                     streamOptions.setAttribute('id', "streamingOptions");
                     streamOptions.setAttribute('class', `
-                            bg-cyan-800 
-                            hover:bg-cyan-600 
-                            focus:outline-none 
-                            focus:ring focus:ring-cyan-300 
-                            active:bg-cyan-700 
-                            px-10 py-2 text-sm 
-                            leading-5 rounded-full 
-                            font-semibold text-white
-                    `);
+                            
+                    px-5 py-3
+                     bg-btn 
+                     leading-tight 
+                     rounded-full 
+                     shadow-m hover:shadow-2xl 
+                     ease-in-out duration-300
+                      hover:bg-primary active:bg-dark"
+                 `);
+
+
+
+
+
+                    
 
                     
                     streamOptions.innerHTML = `
