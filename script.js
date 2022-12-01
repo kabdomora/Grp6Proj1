@@ -4,18 +4,18 @@ const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const searchURL = BASE_URL + '/search/movie?'+API_KEY;
 
-const RAPIDAPI_APIDOJO_APIKEY = '1e054f74f0msh3a85f5fe15bc6bfp1b30e3jsn7da6ddb61b2e'
-const RAPIDAPI_APIDOJO_BASEURL = 'https://imdb8.p.rapidapi.com'
-const RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_ENDPOINT = '/title/get-user-reviews'
-const RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_URL = `${RAPIDAPI_APIDOJO_BASEURL}${RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_ENDPOINT}`
+// const RAPIDAPI_APIDOJO_APIKEY = '1e054f74f0msh3a85f5fe15bc6bfp1b30e3jsn7da6ddb61b2e'
+// const RAPIDAPI_APIDOJO_BASEURL = 'https://imdb8.p.rapidapi.com'
+// const RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_ENDPOINT = '/title/get-user-reviews'
+// const RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_URL = `${RAPIDAPI_APIDOJO_BASEURL}${RAPIDAPI_APIDOJO_MOVIE_USER_REVIEWS_ENDPOINT}`
 
-const RAPIDAPI_APIDOJO_OPTIONS = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': `${RAPIDAPI_APIDOJO_APIKEY}`,
-        'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-    }
-};
+// const RAPIDAPI_APIDOJO_OPTIONS = {
+//     method: 'GET',
+//     headers: {
+//         'X-RapidAPI-Key': `${RAPIDAPI_APIDOJO_APIKEY}`,
+//         'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+//     }
+// };
 
 const displaySearch = document.getElementById('displaySearch');
 const form =  document.getElementById('form');
@@ -100,7 +100,6 @@ function moviePoster() {
     poster.innerHTML = `
     <img src="${IMG_URL+posterPath}" alt="Movie Poster">
    <div class="movie-info">
-       <h3>${title}</h3>
        <span class="${getColor(vote)}">${vote}</span>
    </div>
 
@@ -214,7 +213,7 @@ function movieTrailer() {
         // console.log(data);
 
         var trailerHeader = document.createElement('h3');
-        trailerHeader.setAttribute('class', "flex flex-row px-20 text-xl font-sans font-extrabold py-5 underline");
+        trailerHeader.setAttribute('class', "flex flex-row px-20 text-xl font-sans font-extrabold py-5 underline text-black-400/0 dark:text-white");
         trailerHeader.innerHTML = 'Trailers and Other Videos';
 
         data.results.forEach((value, index) => {
@@ -339,7 +338,7 @@ function movieReviews() {
         var totalReviews = data.total_results;
 
         var reviewHeader = document.createElement('button');
-        reviewHeader.setAttribute('class', "accordion px-10 text-xl font-sans font-extrabold py-5");
+        reviewHeader.setAttribute('class', "accordion px-10 text-xl font-sans font-extrabold py-5 text-black-400/0 dark:text-white");
         reviewHeader.innerHTML = `⛛ Consumer Reviews: ${totalReviews}`;
         reviews.appendChild(reviewHeader);
 
@@ -434,7 +433,7 @@ function similarRecommendations() {
         // console.log(data);
 
         var recommendedHeader = document.createElement('h3');
-        recommendedHeader.setAttribute('class', "flex flex-row px-20 text-xl font-sans font-extrabold py-5 underline");
+        recommendedHeader.setAttribute('class', "flex flex-row px-20 text-xl font-sans font-extrabold py-5 underline text-black-400/0 dark:text-white");
         recommendedHeader.innerHTML = 'Similar Recommendations';
         similar.appendChild(recommendedHeader);
 
