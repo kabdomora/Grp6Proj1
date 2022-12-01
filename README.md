@@ -41,6 +41,8 @@ When I click on an available streaming service, then I am taken to that streamin
 
 When I click the website logo, then I return to the home screen, so I can start my session over. 
 
+If my computer is in dark mode, then the site color scheme adjusts, so the text is still legible against the darker background
+
 --------------------------------------------------------------------------------------------------------------
 
 Made with <3 by: Caleb, Dean, Kayla and Mahdis! 
