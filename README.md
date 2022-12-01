@@ -47,3 +47,6 @@ If my computer is in dark mode, then the site color scheme adjusts, so the text 
 
 Made with <3 by: Caleb, Dean, Kayla and Mahdis! 
 
+Deployed link: https://kabdomora.github.io/Grp6Proj1/
+Deployed screenshot: ![Screenshot](Screenshot-deployed.PNG)
+
