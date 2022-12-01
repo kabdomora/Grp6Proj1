@@ -27,16 +27,25 @@
       @layer components {
         .bg-primary {
           @apply bg-gradient-to-br 
-      from-red-100 
+      from-red-200 
       to-blue-400 
-      via-gray-200;
+      via-gray-300;
+        }
+        .bg-dark {
+          @apply bg-gradient-to-br
+          from-red-800
+          to-blue-800
+          via-gray-800
+        }
+        .bg-btn {
+        @apply bg-yellow-400
         }
       }
     </style>
 
     <title>Movie Finder</title>
   </head>
-  <body class="block">
+  <body>
 
 
   <center>
@@ -92,12 +101,11 @@
 
   <section class="flex flex-row">
     <div class="flex flex-col">
-      <div class="pl-10" id="poster"></div>   
-        
+      <div class="pl-10" id="poster"></div>           
     </div>
+
     <div class ="flex flex-col">
-      <div id="movieTitle" class="p-10"></div>
-      
+      <div id="movieTitle" class="p-10"></div>      
       <div id="overview" class="p-10"></div>
       <div class="flex flex-row p-10" id="streaming"></div> 
     </div>
@@ -139,7 +147,7 @@
         <p id="content" class="font-medium text-base">Wow i hate this movie so much.</p>
       </div> -->
       
-    </div>   
+    <!-- </div>    -->
 
   </section>
 
