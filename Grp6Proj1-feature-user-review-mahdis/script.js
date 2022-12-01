@@ -133,6 +133,7 @@ function movieReviews() {
         .then(data => {
 
             let total_reviews = data.reviews.length
+            console.log(data);
 
             let reviewHeader = document.createElement('h3');
             reviewHeader.setAttribute('class', "flex flex-col px-10 text-xl font-sans font-extrabold py-5");
@@ -180,7 +181,7 @@ function movieReviews() {
                     contentPEl.setAttribute('class', 'font-medium text-base no-underline ')
                     contentPEl.setAttribute('id', 'content')
                     contentPEl.innerHTML = `${reviewBody}`
-
+                    reviewCard.appendChild(reviewedByPEl)
                     reviewCard.appendChild(authorRatingPEl)
                     reviewCard.appendChild(scoreValuePEl)
                     reviewCard.appendChild(contentPEl)
